@@ -4,6 +4,7 @@ import com.RAGIR.Internship.Enum.Activity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -20,7 +21,6 @@ public class Organization {
     private int id;
 
     @Column
-
     private  String OrganizationId;
 
     @Column
@@ -39,5 +39,9 @@ public class Organization {
     @Column
     @CreationTimestamp
     Date createdAt;
+
+    @Column
+    @UpdateTimestamp
+    Date updatedAt;
 
 }

@@ -41,4 +41,9 @@ public class OrganizationController {
         }
         }
 
+        @GetMapping("/org")
+    public ResponseEntity getUserByName(@RequestParam("name") String name){
+        return new ResponseEntity(organizationService.getUserByName(name),HttpStatus.OK);
+        }
+
 }

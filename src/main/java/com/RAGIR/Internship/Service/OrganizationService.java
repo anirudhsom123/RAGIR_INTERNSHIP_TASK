@@ -8,7 +8,7 @@ import com.RAGIR.Internship.Repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,7 +21,20 @@ public class OrganizationService {
     public void addOrganizer(OrganizationRequestDTO organizationRequestDTO) {
     Organization requestOrganization=OrganizationRequestDTO2Organization(organizationRequestDTO);
 
-    organizationRepository.save(requestOrganization);
+    requestOrganization=generateOrganizationId(requestOrganization);
+
+    // organizationRepository.save(requestOrganization);
+    }
+    public Organization generateOrganizationId(Organization organization) {
+
+        Organization savedOrganization = organizationRepository.save(organization);
+
+
+        String organizationId = String.format("ORG%05d", savedOrganization.getId());
+
+        savedOrganization.setOrganizationId(organizationId);
+
+        return organizationRepository.save(savedOrganization);
     }
 
     public OrganizationResponseDTO getUsedById(int id) {
@@ -55,4 +68,8 @@ public class OrganizationService {
     }
 
 
+    public List<Organization> getUserByName(String name) {
+        List<Organization> optionalOrganization=organizationRepository.findByName(name);
+        return optionalOrganization;
+    }
 }
