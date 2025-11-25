@@ -1,10 +1,8 @@
 package com.RAGIR.Internship.Controller;
 
-import com.RAGIR.Internship.DTO.Reponse.OrganizationResponseDTO;
 import com.RAGIR.Internship.DTO.Request.OrganizationRequestDTO;
 import com.RAGIR.Internship.Exceptions.OrganizationAlreadyExistExpection;
 import com.RAGIR.Internship.Exceptions.OrganizationNotFoundException;
-import com.RAGIR.Internship.Model.Organization;
 import com.RAGIR.Internship.Service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,12 +19,13 @@ public class OrganizationController {
     public ResponseEntity addOrganizer(@RequestBody OrganizationRequestDTO organizationRequestDTO){
 
         try{
+
             organizationService.addOrganizer(organizationRequestDTO);
 
             return new ResponseEntity("success", HttpStatus.OK);
         } catch(OrganizationAlreadyExistExpection e){
 
-            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("bad request",HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -43,7 +42,13 @@ public class OrganizationController {
 
         @GetMapping("/org")
     public ResponseEntity getUserByName(@RequestParam("name") String name){
-        return new ResponseEntity(organizationService.getUserByName(name),HttpStatus.OK);
+
+        try{
+            return new ResponseEntity(organizationService.getUserByName(name),HttpStatus.OK);
+        } catch (OrganizationNotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+
         }
 
 }

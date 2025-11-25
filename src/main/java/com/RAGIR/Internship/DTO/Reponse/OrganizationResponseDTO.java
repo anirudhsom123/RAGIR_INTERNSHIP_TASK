@@ -1,11 +1,7 @@
 package com.RAGIR.Internship.DTO.Reponse;
 
 import com.RAGIR.Internship.Enum.Activity;
-import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -14,15 +10,17 @@ import java.util.Date;
 @Builder
 public class OrganizationResponseDTO {
 
-    String OrganizationId;
+    private String OrganizationId;
 
-     String name;
+    private String name;
 
-     String email;
+    private String email;
 
-     String phone;
+    private String phone;
 
     private Activity activity;
+
+    // getter setter and constructor using lombok
 
 
 }

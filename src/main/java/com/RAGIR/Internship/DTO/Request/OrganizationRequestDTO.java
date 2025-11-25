@@ -19,4 +19,6 @@ public class OrganizationRequestDTO {
     private String phone;
 
     private Activity activity;
+
+    // getter setter and constructor using lombok
 }

@@ -1,6 +1,5 @@
 package com.RAGIR.Internship.Repository;
 
-import com.RAGIR.Internship.DTO.Reponse.OrganizationResponseDTO;
 import com.RAGIR.Internship.Model.Organization;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

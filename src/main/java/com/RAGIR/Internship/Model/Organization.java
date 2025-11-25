@@ -44,4 +44,6 @@ public class Organization {
     @UpdateTimestamp
     Date updatedAt;
 
+    // getter setter and constructor using lombok
+
 }

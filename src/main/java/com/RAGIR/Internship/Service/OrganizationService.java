@@ -21,10 +21,11 @@ public class OrganizationService {
     public void addOrganizer(OrganizationRequestDTO organizationRequestDTO) {
     Organization requestOrganization=OrganizationRequestDTO2Organization(organizationRequestDTO);
 
-    requestOrganization=generateOrganizationId(requestOrganization);
+    generateOrganizationId(requestOrganization);
 
-    // organizationRepository.save(requestOrganization);
     }
+
+    // logic to generate organizationID attribute
     public Organization generateOrganizationId(Organization organization) {
 
         Organization savedOrganization = organizationRepository.save(organization);
@@ -48,6 +49,7 @@ public class OrganizationService {
 
     }
 
+    // convert organization to DTO
     private OrganizationResponseDTO Organization2ResponseDTO(Organization organization) {
         return OrganizationResponseDTO.builder()
                 .OrganizationId(organization.getOrganizationId())
@@ -57,7 +59,7 @@ public class OrganizationService {
                 .activity(organization.getActivity())
                 .build();
     }
-
+   // convert organization dto to  organization
     public Organization OrganizationRequestDTO2Organization(OrganizationRequestDTO organizationRequestDTO){
         return Organization.builder()
                 .name(organizationRequestDTO.getName())
@@ -68,8 +70,13 @@ public class OrganizationService {
     }
 
 
+    // return list of users with the name provided
     public List<Organization> getUserByName(String name) {
         List<Organization> optionalOrganization=organizationRepository.findByName(name);
+
+        if(optionalOrganization.size()==0){
+            throw new OrganizationNotFoundException("invalid name");
+        }
         return optionalOrganization;
     }
 }
